@@ -51,8 +51,8 @@ void Inset_Linklist(struct LinkNode *header, int oldval, int newval)
         {
             break;
         }
-        pRecv = pCurrent;
-        pCurrent = pCurrent->next;
+        pRecv = pCurrent;//找前驱
+        pCurrent = pCurrent->next;//后驱
     }
     /*
     if(pCurrent == NULL)
@@ -127,6 +127,17 @@ void Destory_Linklist(struct LinkNode *header)
         pCurrent = pNext;
     }
 }
+int findnum_Linklist(struct LinkNode *header)
+{
+    int i = 0;
+    struct LinkNode *pCurrent = header;
+    while(pCurrent != NULL)
+    {
+        pCurrent = pCurrent -> next;
+        i++;
+    }
+    return i;
+}
 //清空
 void Clear_Linklist(struct LinkNode *header)
 {
@@ -147,9 +158,11 @@ void Clear_Linklist(struct LinkNode *header)
 }
 int main()
 {
+    int num = 0;
     struct LinkNode *header = Init_Linklist();
-    printf("1");
     Foreach_Linklist(header);
+    num = findnum_Linklist(header);
+    printf("num is %d\n",num);
     printf("============================\n");
     Inset_Linklist(header,300,6666);
     Foreach_Linklist(header);

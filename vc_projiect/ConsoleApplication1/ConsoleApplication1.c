@@ -1,28 +1,26 @@
 ﻿#include<stdio.h>
 #include<stdlib.h>
+#include<string.h>
+#include"owen.h"
+struct stu_st
+{
+    int id;
+    char name[32];
+    int math;
+};
 int main()
 {
-    int i = 1;
-    
-    //格式 int* name = 地址;
-    // & 取地址符
-    // * 取值
-    //int* p = &i;
-    int* p = NULL; 
-    p = &i;
-    int** q = &p;
-    printf("i is %d\n", i);
-    printf("&i is %p\n", &i);//地址i
-    printf("p is %p\n", p);//地址i
-    printf("p is %p\n", &p);//地址p
-    printf("*p is %d\n", *p);
-    printf("q is %p\n", q);//地址p 
-    printf("**q is %d\n", **q);
-    printf("*q is %p\n", *q);//地址i
-
-    printf("q is %p\n", &q);//地址q
-
-    printf("i sizeof is %d\n", (int)sizeof(i));
-    printf("p sizeof is %d\n", (int)sizeof(p));
-    return 0;
+    int i;
+    struct stu_st tmp;
+    LLIST* handler;
+    handler = llist_create(sizeof(struct stu_st));
+    for (i = 0; i < 7; i++)
+    {
+        tmp.id = i;
+        tmp.math = rand() % 100;
+        strcpy(&tmp.name,"stu");
+        llist_insert(handler,&tmp,LLIST_FORWARD );
+    }
+    llist_show(handler);
+    llist_dedtory(handler);
 }
